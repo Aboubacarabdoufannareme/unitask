@@ -5,7 +5,7 @@ session_start();
 $dbHost = 'localhost';
 $dbUser = 'fannareme.abdou';
 $dbPass = 'fa889033';
-$dbName = webtech_2025A_fannareme_abdou';
+$dbName = 'webtech_2025A_fannareme_abdou';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(400);
@@ -48,7 +48,7 @@ $stmt->close();
 
 // Insert new user
 $hash = password_hash($password, PASSWORD_DEFAULT);
-$ins = $mysqli->prepare("INSERT INTO users (full_name, email, password, created_at) VALUES (?, ?, ?, NOW())");
+$ins = $mysqli->prepare("INSERT INTO users (full_name, email, password, created_at, last_login) VALUES (?, ?, ?, NOW(),?)");
 $ins->bind_param('sss', $fullName, $email, $hash);
 
 if ($ins->execute()) {
